@@ -7,7 +7,7 @@ RUN ./mvnw dependency:go-offline
 COPY ./src ./src
 RUN ./mvnw clean install -DskipTests
 
-FROM eclipse-temurin:11-jre-jammy
+FROM eclipse-temurin:17-jdk-focal
 WORKDIR /app
 EXPOSE 8080
 COPY --from=builder /app/target/*.jar /app/*.jar
