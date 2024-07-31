@@ -11,7 +11,7 @@
 	<groupId>org.robe</groupId>
 	<artifactId>fpa</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>money-transfer</name>
+	<name>Financial Personal App</name>
 	<description>Financial Personal App</description>
 	<url/>
 	<licenses>
