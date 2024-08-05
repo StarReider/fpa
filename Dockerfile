@@ -11,4 +11,4 @@ FROM eclipse-temurin:17-jdk-alpine
 WORKDIR /app
 EXPOSE 8080
 COPY --from=builder /app/target/*.jar /app/*.jar
-ENTRYPOINT ["java","-XshowSettings:vm","-Dspring.profiles.active=prod","-XX:+UseContainerSupport","-XX:MaxRAMPercentage=75.0","-Djava.security.egd=file:/dev/./urandom","-jar","/app/*.jar"]
+ENTRYPOINT ["java","-XshowSettings:vm","-Dspring.profiles.active=prod","-XX:+UseContainerSupport","-XX:MaxRAMPercentage=60.0","-Djava.security.egd=file:/dev/./urandom","-jar","/app/*.jar"]
