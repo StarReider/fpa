@@ -11,4 +11,4 @@ FROM eclipse-temurin:17-jdk-focal
 WORKDIR /app
 EXPOSE 8080
 COPY --from=builder /app/target/*.jar /app/*.jar
-ENTRYPOINT ["java","-Dspring.profiles.active=prod -Xlog:os+container=trace", "-jar", "/app/*.jar" ]
+ENTRYPOINT ["java", "-Dspring.profiles.active=prod", "-Xlog:os+container=trace", "-jar", "/app/*.jar" ]
