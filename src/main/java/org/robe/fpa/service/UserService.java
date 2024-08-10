@@ -15,33 +15,33 @@ public class UserService {
     private UserRepository userRepository;
 
     public List<User> getAllUsers() {
-        return userRepository.findAll();
+        return null;//userRepository.findAll();
     }
 
     public Optional<User> getUserById(Long userId) {
-        return userRepository.findById(userId);
+        return null;//userRepository.findById(userId);
     }
     
     public User createUser(User user) {
         user.setCreatedAt(LocalDateTime.now());
         user.setUpdatedAt(LocalDateTime.now());
-        return userRepository.save(user);
+        return null;//userRepository.save(user);
     }
 
     public User updateUser(Long userId, User userDetails) {
-        Optional<User> userOptional = userRepository.findById(userId);
+        Optional<User> userOptional = null;//userRepository.findById(userId);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             user.setUsername(userDetails.getUsername());
             user.setPasswordHash(userDetails.getPasswordHash());
             user.setEmail(userDetails.getEmail());
             user.setUpdatedAt(LocalDateTime.now());
-            return userRepository.save(user);
+            return null;//userRepository.save(user);
         }
         return null;
     }
 
     public void deleteUser(Long userId) {
-        userRepository.deleteById(userId);
+        //userRepository.deleteById(userId);
     }
 }
