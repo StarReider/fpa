@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
-    @Autowired
+    @Autowired(required = false)
     private UserRepository userRepository;
 
     public List<User> getAllUsers() {
