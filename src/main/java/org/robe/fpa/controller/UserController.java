@@ -37,16 +37,15 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        User createdUser = userService.createUser(user);
-        return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+    public ResponseEntity<Long> createUser(@RequestBody User user) {
+        long id = userService.createUser(user);
+        return new ResponseEntity<>(id, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable("id") Long userId, @RequestBody User userDetails) {
-        User updatedUser = userService.updateUser(userId, userDetails);
-        return updatedUser != null ? ResponseEntity.ok(updatedUser) :
-                                     ResponseEntity.notFound().build();
+    public ResponseEntity<Void> updateUser(@PathVariable("id") Long userId, @RequestBody User userDetails) {
+        boolean updated = userService.updateUser(userId, userDetails);
+        return updated ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")

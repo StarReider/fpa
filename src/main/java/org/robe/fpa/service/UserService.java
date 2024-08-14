@@ -11,37 +11,38 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
-    @Autowired(required = false)
+    
+    @Autowired
     private UserRepository userRepository;
 
     public List<User> getAllUsers() {
-        return null;//userRepository.findAll();
+        return userRepository.findAll();
     }
 
     public Optional<User> getUserById(Long userId) {
-        return null;//userRepository.findById(userId);
+        return userRepository.findById(userId);
     }
     
-    public User createUser(User user) {
-        user.setCreatedAt(LocalDateTime.now());
-        user.setUpdatedAt(LocalDateTime.now());
-        return null;//userRepository.save(user);
+    public long createUser(User user) {
+        return userRepository.save(user);
     }
 
-    public User updateUser(Long userId, User userDetails) {
-        Optional<User> userOptional = null;//userRepository.findById(userId);
+    public boolean updateUser(Long userId, User userDetails) {
+        Optional<User> userOptional = userRepository.findById(userId);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             user.setUsername(userDetails.getUsername());
             user.setPasswordHash(userDetails.getPasswordHash());
             user.setEmail(userDetails.getEmail());
             user.setUpdatedAt(LocalDateTime.now());
-            return null;//userRepository.save(user);
+            
+            userRepository.save(user);
+            return true;
         }
-        return null;
+        return false;
     }
 
     public void deleteUser(Long userId) {
-        //userRepository.deleteById(userId);
+        userRepository.deleteUser(userId);
     }
 }
