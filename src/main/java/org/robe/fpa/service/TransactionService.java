@@ -1,6 +1,7 @@
 package org.robe.fpa.service;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,7 +46,10 @@ public class TransactionService {
             throw new IllegalArgumentException("Insufficient funds in the source account.");
         }
         
-        transactionRepository.save(transaction);
+        long id = transactionRepository.save(transaction);
+        if(transaction.isScheduled() && transaction.getScheduledDate() != null && transaction.getScheduledDate().isAfter(LocalDateTime.now())) {
+            return id;
+        }
         
         var newSourceBalance = sourceAccount.get().getBalance().subtract(transaction.getAmount());
         sourceAccount.get().setBalance(newSourceBalance);
