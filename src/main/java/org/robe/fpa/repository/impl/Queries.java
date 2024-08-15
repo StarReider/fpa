@@ -53,7 +53,7 @@ public class Queries {
         "WHERE account_id = :id";
     
     public static final String FIND_ACCOUNT_BY_ID = 
-        "SELECT account_id, user_id, account_name, type, balance, currency, interest_rate " +
+        "SELECT account_id, user_id, account_name, type, balance, currency, interest_rate, created_at, updated_at " +
         "FROM Accounts " + 
         "WHERE account_id = :id";
     

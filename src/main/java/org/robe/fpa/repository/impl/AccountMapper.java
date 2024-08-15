@@ -20,7 +20,7 @@ public class AccountMapper implements RowMapper<Account> {
         account.setAccountId(rs.getLong("account_id"));
         account.setUserId(rs.getLong("user_id"));
         account.setAccountName(rs.getString("account_name"));
-        account.setType(AccountType.valueOf(rs.getString("account_type")));
+        account.setType(AccountType.valueOf(rs.getString("type")));
         account.setBalance(rs.getBigDecimal("balance"));
         account.setCurrency(rs.getString("currency"));
         account.setInterestRate(rs.getBigDecimal("interest_rate"));
