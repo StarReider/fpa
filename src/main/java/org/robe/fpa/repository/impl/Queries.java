@@ -36,16 +36,16 @@ public class Queries {
         "WHERE user_id = :id";
     
     public static final String FIND_ALL_ACCOUNTS = 
-        "SELECT account_id, user_id, account_name, account_type, balance, currency, interest_rate, created_at, updated_at " +
+        "SELECT account_id, user_id, account_name, type, balance, currency, interest_rate, created_at, updated_at " +
         "FROM Accounts";
     
     public static final String CREATE_ACCOUNT = 
-        "INSERT INTO Accounts(user_id, account_name, account_type, balance, currency, interest_rate) " +
-        "VALUES(:user_id, :account_name, :account_type, :balance, :currency, :interest_rate)";
+        "INSERT INTO Accounts(user_id, account_name, type, balance, currency, interest_rate) " +
+        "VALUES(:user_id, :account_name, :type, :balance, :currency, :interest_rate)";
     
     public static final String UPDATE_ACCOUNT = 
         "UPDATE Accounts " +
-        "SET user_id = :user_id, account_name = :account_name, account_type = :account_type, balance = :balance, currency = :currency, updated_at = now() " +
+        "SET user_id = :user_id, account_name = :account_name, type = :type, balance = :balance, currency = :currency, updated_at = now() " +
         "WHERE account_id = :id";
     
     public static final String DELETE_ACCOUNT_BY_ID = 
@@ -53,7 +53,7 @@ public class Queries {
         "WHERE account_id = :id";
     
     public static final String FIND_ACCOUNT_BY_ID = 
-        "SELECT account_id, user_id, account_name, account_type, balance, currency, interest_rate " +
+        "SELECT account_id, user_id, account_name, type, balance, currency, interest_rate " +
         "FROM Accounts " + 
         "WHERE account_id = :id";
     
@@ -73,4 +73,31 @@ public class Queries {
     public static final String DELETE_CURRENCY_BY_CODE = 
         "DELETE FROM Currencies " +
         "WHERE currency_code = :code";
+    
+    public static final String FIND_TRANSACTION_BY_ID = 
+        "SELECT transaction_id, status, source_account_id, target_account_id, account_id, amount, type, description, is_scheduled, scheduled_date, created_at, updated_at " +
+        "FROM Transactions " + 
+        "WHERE transaction_id = :id";
+    
+    public static final String FIND_TRANSACTION_BY_ACCOUNT_ID = 
+        "SELECT transaction_id, status, source_account_id, target_account_id, amount, type, description, is_scheduled, scheduled_date, created_at, updated_at " +
+        "FROM Transactions " + 
+        "WHERE source_account_id = :id OR target_account_id = :id";
+    
+    public static final String CREATE_TRANSACTION = 
+        "INSERT INTO Transactions(status, source_account_id, target_account_id, amount, type, description, is_scheduled, scheduled_date) " +
+        "VALUES(:status, :source_account_id, :target_account_id, :amount, :type, :description, :is_scheduled, :scheduled_date)";
+    
+    public static final String UPDATE_TRANSACTION = 
+        "UPDATE Transactions " +
+        "SET status = :status, source_account_id = :source_account_id, target_account_id = :target_account_id, amount = :amount, type = :type, description = :description, is_scheduled =:is_scheduled, scheduled_date = :scheduled_date, updated_at = now() " +
+        "WHERE transaction_id = :id";
+    
+    public static final String FIND_ALL_TRANSACTIONS = 
+        "SELECT transaction_id, status, source_account_id, target_account_id, amount, type, description, is_scheduled, scheduled_date, created_at, updated_at " +
+        "FROM Transactions";
+    
+    public static final String DELETE_TRANSACTION_BY_ID = 
+        "DELETE FROM Transactions " +
+        "WHERE transaction_id = :id";
 }

@@ -10,7 +10,7 @@ public class Account {
     private Long accountId;
     private Long userId;
     private String accountName;
-    private String accountType;
+    private AccountType type;
     private BigDecimal balance;
     private String currency;
     private BigDecimal interestRate;

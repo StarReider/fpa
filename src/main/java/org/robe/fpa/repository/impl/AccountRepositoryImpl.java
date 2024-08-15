@@ -1,5 +1,6 @@
 package org.robe.fpa.repository.impl;
 
+import java.sql.Types;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -56,7 +57,7 @@ public class AccountRepositoryImpl implements AccountRepository {
         return new MapSqlParameterSource()
                 .addValue("user_id", account.getUserId())
                 .addValue("account_name", account.getAccountName())
-                .addValue("account_type", account.getAccountType())
+                .addValue("type", account.getType(), Types.OTHER)
                 .addValue("balance", account.getBalance())
                 .addValue("currency", account.getCurrency())
                 .addValue("interest_rate", account.getInterestRate());

@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 import java.util.Optional;
 
 import org.robe.fpa.model.Account;
+import org.robe.fpa.model.AccountType;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +20,7 @@ public class AccountMapper implements RowMapper<Account> {
         account.setAccountId(rs.getLong("account_id"));
         account.setUserId(rs.getLong("user_id"));
         account.setAccountName(rs.getString("account_name"));
-        account.setAccountType(rs.getString("account_type"));
+        account.setType(AccountType.valueOf(rs.getString("account_type")));
         account.setBalance(rs.getBigDecimal("balance"));
         account.setCurrency(rs.getString("currency"));
         account.setInterestRate(rs.getBigDecimal("interest_rate"));

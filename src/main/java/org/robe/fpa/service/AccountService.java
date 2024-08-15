@@ -31,7 +31,7 @@ public class AccountService {
         if (accountOptional.isPresent()) {
             var account = accountOptional.get();
             account.setAccountName(accountDetails.getAccountName());
-            account.setAccountType(accountDetails.getAccountType());
+            account.setType(accountDetails.getType());
             account.setBalance(accountDetails.getBalance());
             account.setCurrency(accountDetails.getCurrency());
             account.setInterestRate(accountDetails.getInterestRate());
