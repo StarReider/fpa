@@ -97,6 +97,11 @@ public class Queries {
         "SELECT transaction_id, status, source_account_id, target_account_id, amount, type, description, is_scheduled, scheduled_date, created_at, updated_at " +
         "FROM Transactions";
     
+    public static final String FIND_SCHEDULED_TRANSACTIONS = 
+        "SELECT transaction_id, status, source_account_id, target_account_id, amount, type, description, is_scheduled, scheduled_date, created_at, updated_at " +
+        "FROM Transactions " + 
+        "WHERE is_scheduled IS TRUE AND scheduled_date::date = CURRENT_DATE AND status = 'PENDING'";
+    
     public static final String DELETE_TRANSACTION_BY_ID = 
         "DELETE FROM Transactions " +
         "WHERE transaction_id = :id";

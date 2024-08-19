@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.robe.fpa.model.Transaction;
+import org.robe.fpa.service.ScheduledTransactionService;
 import org.robe.fpa.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,8 @@ public class TransactionController {
     
     @Autowired
     private TransactionService transactionService;
+    @Autowired
+    private ScheduledTransactionService scheduledTransactionService;
 
     @GetMapping
     public ResponseEntity<List<Transaction>> getAllTransactions() {
@@ -47,6 +50,12 @@ public class TransactionController {
     public ResponseEntity<Long> createTransaction(@RequestBody Transaction transaction) {
         long id = transactionService.createTransaction(transaction);
         return new ResponseEntity<>(id, HttpStatus.CREATED);
+    }
+    
+    @PostMapping("/scheduled")
+    public ResponseEntity<Void> runScheduled() {
+        scheduledTransactionService.runScheduledTransactions();
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")

@@ -24,6 +24,11 @@ public class TransactionRepositoryImpl implements TransactionRepository {
     private final TransactionMapper transactionMapper;
     
     @Override
+    public List<Transaction> findScheduled() {
+        return namedParameterJdbcTemplate.query(Queries.FIND_SCHEDULED_TRANSACTIONS, transactionMapper);
+    }
+    
+    @Override
     public List<Transaction> findByAccountId(Long accountId) {
         return namedParameterJdbcTemplate.query(Queries.FIND_TRANSACTION_BY_ACCOUNT_ID, Map.of("id", accountId), transactionMapper);
     }

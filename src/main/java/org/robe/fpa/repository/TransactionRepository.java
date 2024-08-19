@@ -11,4 +11,5 @@ public interface TransactionRepository {
     Long save(Transaction transaction);
     List<Transaction> findAll();
     void deleteById(Long transactionId);
+    List<Transaction> findScheduled();
 }
