@@ -17,7 +17,12 @@ public class ScheduledTransactionService {
     private TransactionRepository transactionRepository;
 
     public void runScheduledTransactions() {
-        for(var trs : transactionRepository.findScheduled()) {
+        log.info("scheduled transactions job is started");
+        
+        var transactions = transactionRepository.findScheduled();
+        log.info("{} scheduled transactions were found", transactions.size());
+        
+        for(var trs : transactions) {
             try {
                 transactionService.createTransaction(trs); 
             } catch (Exception e) {
