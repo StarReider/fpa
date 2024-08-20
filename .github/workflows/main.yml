@@ -1,0 +1,14 @@
+name: Run Scheduled Transactions
+
+on: 
+   workflow_dispatch:
+   schedule:
+     - cron: '0 0 * * *'
+
+jobs:
+  scheduled_transactions_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run curl.
+        run: |
+          curl -X POST --location 'https://financialpersonalapp.adaptable.app/api/transactions/scheduled'
