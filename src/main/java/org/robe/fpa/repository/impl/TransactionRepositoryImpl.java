@@ -64,15 +64,22 @@ public class TransactionRepositoryImpl implements TransactionRepository {
     }
 
     private SqlParameterSource prepareTransactionForInsert(Transaction transaction) {
-        return new MapSqlParameterSource()
+        var parameterSource = new MapSqlParameterSource()
                 .addValue("source_account_id", transaction.getSourceAccountId())
-                .addValue("target_account_id", transaction.getTargetAccountId())
                 .addValue("amount", transaction.getAmount())
                 .addValue("type", transaction.getType().getName(), Types.OTHER)
                 .addValue("description", transaction.getDescription())
                 .addValue("is_scheduled", transaction.isScheduled())
                 .addValue("scheduled_date", transaction.getScheduledDate())
                 .addValue("status", transaction.getStatus(), Types.OTHER);
+        
+        if(transaction.getTargetAccountId() == null || transaction.getTargetAccountId() == 0) {
+            parameterSource.addValue("target_account_id", null);
+        } else {
+            parameterSource.addValue("target_account_id", transaction.getTargetAccountId());
+        }
+        
+        return parameterSource;
     }
 
     private SqlParameterSource prepareTransactionForUpdate(Transaction transaction) {
