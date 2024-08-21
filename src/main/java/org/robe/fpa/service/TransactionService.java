@@ -68,6 +68,7 @@ public class TransactionService {
         }
         
         transaction.setStatus(TransactionStatus.COMPLETED);
+        transaction.setTransactionDate(LocalDateTime.now());
         return transactionRepository.save(transaction);
     }
 
