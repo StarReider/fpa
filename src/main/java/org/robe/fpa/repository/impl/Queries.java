@@ -85,8 +85,8 @@ public class Queries {
         "WHERE source_account_id = :id OR target_account_id = :id";
     
     public static final String CREATE_TRANSACTION = 
-        "INSERT INTO Transactions(status, source_account_id, target_account_id, amount, type, description, is_scheduled, scheduled_date) " +
-        "VALUES(:status, :source_account_id, :target_account_id, :amount, :type, :description, :is_scheduled, :scheduled_date)";
+        "INSERT INTO Transactions(source_account_id, target_account_id, amount, type, description, is_scheduled, scheduled_date) " +
+        "VALUES(:source_account_id, :target_account_id, :amount, :type, :description, :is_scheduled, :scheduled_date)";
     
     public static final String UPDATE_TRANSACTION = 
         "UPDATE Transactions " +
