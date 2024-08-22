@@ -1,9 +1,10 @@
-package org.robe.fpa.service;
+package org.robe.fpa.service.impl;
 
 import java.util.Map;
 
 import org.robe.fpa.OpenExchangeRatesConfiguration;
 import org.robe.fpa.model.OpenExchangeRateResponse;
+import org.robe.fpa.service.OpenExchangeRatesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package org.robe.fpa.service;
+package org.robe.fpa.service.impl;
 
 import org.robe.fpa.model.TransactionStatus;
 import org.robe.fpa.repository.TransactionRepository;

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.robe.fpa.model.User;
-import org.robe.fpa.service.UserService;
+import org.robe.fpa.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package org.robe.fpa.service;
+package org.robe.fpa.service.impl;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.robe.fpa.model.Currency;
 import org.robe.fpa.repository.CurrencyRepository;
+import org.robe.fpa.service.OpenExchangeRatesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

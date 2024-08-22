@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.robe.fpa.model.Transaction;
-import org.robe.fpa.service.ScheduledTransactionService;
-import org.robe.fpa.service.TransactionService;
+import org.robe.fpa.service.impl.ScheduledTransactionService;
+import org.robe.fpa.service.impl.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
