@@ -40,6 +40,19 @@ public class CurrencyRepositoryImpl implements CurrencyRepository {
     public void deleteById(String currencyCode) {
         namedParameterJdbcTemplate.update(Queries.DELETE_CURRENCY_BY_CODE, Map.of("code", currencyCode));
     }
+
+    @Override
+    public void save(List<Currency> currencies) {
+        SqlParameterSource[] paramSources = currencies.stream()
+                .map(this::prepareCurrencyForInsert)
+                .toArray(SqlParameterSource[]::new);
+        namedParameterJdbcTemplate.batchUpdate(Queries.CREATE_CURRENCY, paramSources);
+    }
+    
+    @Override
+    public void deleteAll() {
+        namedParameterJdbcTemplate.update(Queries.DELETE_ALL_CURRENCIES, Map.of());
+    }
     
     private SqlParameterSource prepareCurrencyForInsert(Currency currency) {
         return new MapSqlParameterSource()

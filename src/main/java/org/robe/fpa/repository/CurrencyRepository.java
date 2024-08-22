@@ -10,4 +10,6 @@ public interface CurrencyRepository {
     Optional<Currency> findByCode(String currencyCode);
     void save(Currency currency);
     void deleteById(String currencyCode);
+    void save(List<Currency> currencies);
+    void deleteAll();
 }

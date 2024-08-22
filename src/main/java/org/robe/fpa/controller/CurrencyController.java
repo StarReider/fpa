@@ -47,4 +47,10 @@ public class CurrencyController {
         currencyService.deleteCurrency(currencyCode);
         return ResponseEntity.noContent().build();
     }
+    
+    @PostMapping("/sync")
+    public ResponseEntity<Void> sync() {
+        currencyService.syncCurrencies();
+        return ResponseEntity.noContent().build();
+    }
 }
