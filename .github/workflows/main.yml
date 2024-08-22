@@ -9,6 +9,12 @@ jobs:
   scheduled_transactions_job:
     runs-on: ubuntu-latest
     steps:
-      - name: Run curl.
+      - name: Run curl
         run: |
           curl -X POST --location 'https://financialpersonalapp.adaptable.app/api/transactions/scheduled'
+  currencies_sync_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run curl
+        run: |
+          curl -X POST --location 'https://financialpersonalapp.adaptable.app/api/currencies/sync'
