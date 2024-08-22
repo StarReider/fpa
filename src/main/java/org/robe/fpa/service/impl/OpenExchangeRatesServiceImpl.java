@@ -2,7 +2,7 @@ package org.robe.fpa.service.impl;
 
 import java.util.Map;
 
-import org.robe.fpa.OpenExchangeRatesConfiguration;
+import org.robe.fpa.configuration.OpenExchangeRatesConfiguration;
 import org.robe.fpa.model.OpenExchangeRateResponse;
 import org.robe.fpa.service.OpenExchangeRatesService;
 import org.springframework.beans.factory.annotation.Autowired;
