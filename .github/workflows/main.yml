@@ -1,4 +1,4 @@
-name: Run Scheduled Transactions
+name: Run FPA Jobs
 
 on: 
    workflow_dispatch:
