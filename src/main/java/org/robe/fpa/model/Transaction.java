@@ -11,6 +11,7 @@ public class Transaction {
     private Long sourceAccountId;
     private Long targetAccountId;
     private BigDecimal amount;
+    private BigDecimal targetAmount;
     private String currencyCode;
     private TransactionType type;
     private LocalDateTime transactionDate;

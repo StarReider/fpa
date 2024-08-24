@@ -67,6 +67,7 @@ public class TransactionRepositoryImpl implements TransactionRepository {
         var parameterSource = new MapSqlParameterSource()
                 .addValue("source_account_id", transaction.getSourceAccountId())
                 .addValue("amount", transaction.getAmount())
+                .addValue("target_amount", transaction.getTargetAmount())
                 .addValue("type", transaction.getType().getName(), Types.OTHER)
                 .addValue("description", transaction.getDescription())
                 .addValue("is_scheduled", transaction.isScheduled())

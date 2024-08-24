@@ -5,7 +5,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum TransactionType {
     DEBIT("debit"),
     CREDIT("credit"),
-    INTEREST("interest");
+    INTEREST("interest"),
+    CONVERSION("conversion");
     
     private String name;
     

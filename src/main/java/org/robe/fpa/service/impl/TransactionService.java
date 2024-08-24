@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.robe.fpa.model.Transaction;
 import org.robe.fpa.model.TransactionStatus;
+import org.robe.fpa.model.TransactionType;
 import org.robe.fpa.repository.AccountRepository;
 import org.robe.fpa.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,7 +62,12 @@ public class TransactionService {
         if(transaction.getTargetAccountId() != null) {
             var destinationAccount = accountRepository.findById(transaction.getTargetAccountId()).orElse(null);
             if (destinationAccount != null) {
-                BigDecimal newDestinationBalance = destinationAccount.getBalance().add(transaction.getAmount());
+                BigDecimal newDestinationBalance = null;
+                if(TransactionType.CONVERSION == transaction.getType()) {
+                    newDestinationBalance = destinationAccount.getBalance().add(transaction.getTargetAmount());
+                } else {
+                    newDestinationBalance = destinationAccount.getBalance().add(transaction.getAmount());
+                }
                 destinationAccount.setBalance(newDestinationBalance);
                 accountRepository.save(destinationAccount);
             }

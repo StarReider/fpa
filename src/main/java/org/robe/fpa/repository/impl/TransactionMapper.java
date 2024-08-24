@@ -23,6 +23,7 @@ public class TransactionMapper implements RowMapper<Transaction> {
         transaction.setSourceAccountId(rs.getLong("source_account_id"));
         transaction.setTargetAccountId(rs.getLong("target_account_id") == 0 ? null : rs.getLong("target_account_id"));
         transaction.setAmount(rs.getBigDecimal("amount"));
+        transaction.setTargetAmount(rs.getBigDecimal("target_amount"));
         transaction.setType(TransactionType.valueOfName(rs.getString("type")));
         transaction.setScheduled(rs.getBoolean("is_scheduled"));
         transaction.setDescription(rs.getString("description"));

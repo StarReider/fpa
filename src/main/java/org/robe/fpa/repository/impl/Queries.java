@@ -78,30 +78,30 @@ public class Queries {
         "TRUNCATE TABLE Currencies CASCADE";
     
     public static final String FIND_TRANSACTION_BY_ID = 
-        "SELECT transaction_id, status, source_account_id, target_account_id, amount, type, description, is_scheduled, scheduled_date, created_at, updated_at " +
+        "SELECT transaction_id, status, source_account_id, target_account_id, amount, type, description, is_scheduled, scheduled_date, target_amount, created_at, updated_at " +
         "FROM Transactions " + 
         "WHERE transaction_id = :id";
     
     public static final String FIND_TRANSACTION_BY_ACCOUNT_ID = 
-        "SELECT transaction_id, status, source_account_id, target_account_id, amount, type, description, is_scheduled, scheduled_date, created_at, updated_at " +
+        "SELECT transaction_id, status, source_account_id, target_account_id, amount, type, description, is_scheduled, scheduled_date, target_amount, created_at, updated_at " +
         "FROM Transactions " + 
         "WHERE source_account_id = :id OR target_account_id = :id";
     
     public static final String CREATE_TRANSACTION = 
-        "INSERT INTO Transactions(source_account_id, target_account_id, amount, type, description, is_scheduled, scheduled_date) " +
-        "VALUES(:source_account_id, :target_account_id, :amount, :type, :description, :is_scheduled, :scheduled_date)";
+        "INSERT INTO Transactions(source_account_id, target_account_id, amount, type, description, is_scheduled, scheduled_date, target_amount) " +
+        "VALUES(:source_account_id, :target_account_id, :amount, :type, :description, :is_scheduled, :scheduled_date, :target_amount)";
     
     public static final String UPDATE_TRANSACTION = 
         "UPDATE Transactions " +
-        "SET status = :status, source_account_id = :source_account_id, target_account_id = :target_account_id, amount = :amount, type = :type, description = :description, is_scheduled =:is_scheduled, scheduled_date = :scheduled_date, updated_at = now() " +
+        "SET status = :status, source_account_id = :source_account_id, target_account_id = :target_account_id, amount = :amount, type = :type, description = :description, is_scheduled =:is_scheduled, scheduled_date = :scheduled_date, target_amount = :target_amount, updated_at = now() " +
         "WHERE transaction_id = :id";
     
     public static final String FIND_ALL_TRANSACTIONS = 
-        "SELECT transaction_id, status, source_account_id, target_account_id, amount, type, description, is_scheduled, scheduled_date, created_at, updated_at " +
+        "SELECT transaction_id, status, source_account_id, target_account_id, amount, type, description, is_scheduled, target_amount, scheduled_date, created_at, updated_at " +
         "FROM Transactions";
     
     public static final String FIND_SCHEDULED_TRANSACTIONS = 
-        "SELECT transaction_id, status, source_account_id, target_account_id, amount, type, description, is_scheduled, scheduled_date, created_at, updated_at " +
+        "SELECT transaction_id, status, source_account_id, target_account_id, amount, type, description, is_scheduled, target_amount, scheduled_date, created_at, updated_at " +
         "FROM Transactions " + 
         "WHERE is_scheduled IS TRUE AND scheduled_date::date <= CURRENT_DATE AND status = 'PENDING'";
     
