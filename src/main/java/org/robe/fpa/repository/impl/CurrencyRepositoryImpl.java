@@ -1,5 +1,6 @@
 package org.robe.fpa.repository.impl;
 
+import java.sql.Types;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -59,6 +60,7 @@ public class CurrencyRepositoryImpl implements CurrencyRepository {
                 .addValue("currency_code", currency.getCurrencyCode())
                 .addValue("currency_name", currency.getCurrencyName())
                 .addValue("exchange_rate", currency.getExchangeRate())
-                .addValue("base_currency", currency.getBaseCurrencyCode());
+                .addValue("base_currency", currency.getBaseCurrencyCode())
+                .addValue("type", currency.getType(), Types.OTHER);
     }
 }

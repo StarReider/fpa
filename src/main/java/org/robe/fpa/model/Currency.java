@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 public class Currency {
     private String currencyCode;
     private String currencyName;
+    private CurrencyType type;
     private BigDecimal exchangeRate;
     private String baseCurrencyCode;
     private LocalDateTime createdAt;

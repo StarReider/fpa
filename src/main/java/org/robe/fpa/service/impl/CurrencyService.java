@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.robe.fpa.model.Account;
 import org.robe.fpa.model.Currency;
 import org.robe.fpa.repository.CurrencyRepository;
 import org.robe.fpa.service.OpenExchangeRatesService;
@@ -30,6 +31,23 @@ public class CurrencyService {
 
     public void createCurrency(Currency currency) {
         currencyRepository.save(currency);
+    }
+    
+    public boolean updateCurrency(String currencyCode, Currency currencyDetails) {
+        Optional<Currency> currencyOptional = currencyRepository.findByCode(currencyCode);
+        if (currencyOptional.isPresent()) {
+            var currency = currencyOptional.get();
+            currency.setBaseCurrencyCode(currencyDetails.getBaseCurrencyCode());
+            currency.setCurrencyCode(currencyDetails.getBaseCurrencyCode());
+            currency.setCurrencyName(currencyDetails.getCurrencyName());
+            currency.setExchangeRate(currencyDetails.getExchangeRate());
+            currency.setType(currencyDetails.getType());
+
+            currencyRepository.save(currency);
+            
+            return true;
+        }
+        return false;
     }
 
     public void deleteCurrency(String currencyCode) {

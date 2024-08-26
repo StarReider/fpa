@@ -58,17 +58,22 @@ public class Queries {
         "WHERE account_id = :id";
     
     public static final String FIND_ALL_CURRENCIES = 
-        "SELECT currency_code, currency_name, exchange_rate, base_currency, created_at " +
+        "SELECT currency_code, currency_name, exchange_rate, base_currency, type, created_at " +
         "FROM Currencies";
     
     public static final String FIND_CURRENCY_BY_CODE = 
-        "SELECT currency_code, currency_name, exchange_rate, base_currency, created_at " +
+        "SELECT currency_code, currency_name, exchange_rate, base_currency, type, created_at " +
         "FROM Currencies " + 
         "WHERE currency_code = :code";
     
     public static final String CREATE_CURRENCY = 
-        "INSERT INTO Currencies(currency_code, currency_name, exchange_rate, base_currency) " +
-        "VALUES(:currency_code, :currency_name, :exchange_rate, :base_currency)";
+        "INSERT INTO Currencies(currency_code, currency_name, exchange_rate, base_currency, type) " +
+        "VALUES(:currency_code, :currency_name, :exchange_rate, :base_currency, :type)";
+    
+    public static final String UPDATE_CURRENCY = 
+        "UPDATE Currencies(currency_code, currency_name, exchange_rate, base_currency, type) " +
+        "SET currency_code = :currency_code, currency_name = :currency_name, exchange_rate = :exchange_rate, base_currency = :base_currency, type = :type) " + 
+        "WHERE currency_code = :currency_code";
     
     public static final String DELETE_CURRENCY_BY_CODE = 
         "DELETE FROM Currencies " +
