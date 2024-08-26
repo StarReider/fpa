@@ -45,7 +45,7 @@ public class Queries {
     
     public static final String UPDATE_ACCOUNT = 
         "UPDATE Accounts " +
-        "SET user_id = :user_id, account_name = :account_name, type = :type, balance = :balance, currency = :currency, updated_at = now() " +
+        "SET user_id = :user_id, account_name = :account_name, type = :type, balance = :balance, currency = :currency, interest_rate = :interest_rate, updated_at = now() " +
         "WHERE account_id = :id";
     
     public static final String DELETE_ACCOUNT_BY_ID = 
