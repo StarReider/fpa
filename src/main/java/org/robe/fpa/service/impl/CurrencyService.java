@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import org.robe.fpa.model.Account;
 import org.robe.fpa.model.Currency;
+import org.robe.fpa.model.CurrencyType;
 import org.robe.fpa.repository.CurrencyRepository;
 import org.robe.fpa.service.OpenExchangeRatesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,6 +69,7 @@ public class CurrencyService {
                         .currencyCode(entry.getKey())
                         .currencyName(entry.getKey())
                         .exchangeRate(new BigDecimal(entry.getValue()))
+                        .type(CurrencyType.FIAT)
                         .build()).toList();
     }
 }
