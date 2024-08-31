@@ -32,6 +32,7 @@ public class TransactionService {
         transaction.setSourceAccountId(accountId);
         transaction.setTargetAccountId(account.getInterestAccountId());
         transaction.setType(TransactionType.INTEREST);
+        transaction.setAmount(BigDecimal.ZERO);
         
         return transaction;
     }
@@ -65,6 +66,7 @@ public class TransactionService {
         if(transaction.isScheduled() && !isScheduledDay) {
             return id;
         }
+        transaction.setTransactionId(id);
         
         if(TransactionType.INTEREST == transaction.getType()) {
             processInterestTransaction(transaction, sourceAccount.get());
@@ -121,6 +123,7 @@ public class TransactionService {
     
     private void processInterestTransaction(Transaction transaction, Account sourceAccount) {
         var interest = sourceAccount.getInterestRate().multiply(sourceAccount.getBalance()).scaleByPowerOfTen(-2);
+        transaction.setAmount(interest);
         BigDecimal newBalance = null;
         
         if(transaction.getTargetAccountId() == null) {
