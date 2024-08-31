@@ -60,7 +60,8 @@ public class AccountRepositoryImpl implements AccountRepository {
                 .addValue("type", account.getType(), Types.OTHER)
                 .addValue("balance", account.getBalance())
                 .addValue("currency", account.getCurrency())
-                .addValue("interest_rate", account.getInterestRate());
+                .addValue("interest_rate", account.getInterestRate())
+                .addValue("interest_account_id", account.getInterestAccountId());
     }
 
     private SqlParameterSource prepareAccountForUpdate(Account account) {

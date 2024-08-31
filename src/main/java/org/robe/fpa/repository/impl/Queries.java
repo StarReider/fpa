@@ -36,16 +36,16 @@ public class Queries {
         "WHERE user_id = :id";
     
     public static final String FIND_ALL_ACCOUNTS = 
-        "SELECT account_id, user_id, account_name, type, balance, currency, interest_rate, created_at, updated_at " +
+        "SELECT account_id, user_id, account_name, type, balance, currency, interest_rate, interest_account_id, created_at, updated_at " +
         "FROM Accounts";
     
     public static final String CREATE_ACCOUNT = 
-        "INSERT INTO Accounts(user_id, account_name, type, balance, currency, interest_rate) " +
-        "VALUES(:user_id, :account_name, :type, :balance, :currency, :interest_rate)";
+        "INSERT INTO Accounts(user_id, account_name, type, balance, currency, interest_rate, interest_account_id) " +
+        "VALUES(:user_id, :account_name, :type, :balance, :currency, :interest_rate, :interest_account_id)";
     
     public static final String UPDATE_ACCOUNT = 
         "UPDATE Accounts " +
-        "SET user_id = :user_id, account_name = :account_name, type = :type, balance = :balance, currency = :currency, interest_rate = :interest_rate, updated_at = now() " +
+        "SET user_id = :user_id, account_name = :account_name, type = :type, balance = :balance, currency = :currency, interest_rate = :interest_rate, interest_account_id = :interest_account_id, updated_at = now() " +
         "WHERE account_id = :id";
     
     public static final String DELETE_ACCOUNT_BY_ID = 
@@ -53,7 +53,7 @@ public class Queries {
         "WHERE account_id = :id";
     
     public static final String FIND_ACCOUNT_BY_ID = 
-        "SELECT account_id, user_id, account_name, type, balance, currency, interest_rate, created_at, updated_at " +
+        "SELECT account_id, user_id, account_name, type, balance, currency, interest_rate, interest_account_id, created_at, updated_at " +
         "FROM Accounts " + 
         "WHERE account_id = :id";
     
