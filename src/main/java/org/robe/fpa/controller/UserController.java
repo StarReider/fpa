@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -37,7 +39,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<Long> createUser(@RequestBody User user) {
+    public ResponseEntity<Long> createUser(@Valid @RequestBody User user) {
         long id = userService.createUser(user);
         return new ResponseEntity<>(id, HttpStatus.CREATED);
     }
