@@ -12,6 +12,7 @@ import org.robe.fpa.model.TransactionStatus;
 import org.robe.fpa.model.TransactionType;
 import org.robe.fpa.repository.AccountRepository;
 import org.robe.fpa.repository.TransactionRepository;
+import org.robe.fpa.utils.InterestCalculator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -27,8 +28,6 @@ public class TransactionService {
     
     public Transaction createInterestTransaction(Account account, long accountId) {
         var transaction = new Transaction();
-        transaction.setScheduled(true);
-        transaction.setScheduledDate(account.getInterestDate());
         transaction.setSourceAccountId(accountId);
         transaction.setTargetAccountId(account.getInterestAccountId());
         transaction.setType(TransactionType.INTEREST);
@@ -52,13 +51,14 @@ public class TransactionService {
     @Transactional(propagation = Propagation.REQUIRED)
     public long createTransaction(Transaction transaction) {
         var sourceAccount = accountRepository.findById(transaction.getSourceAccountId());
-        boolean isScheduledDay = transaction.getScheduledDate() != null && transaction.getScheduledDate().toLocalDate().isEqual(LocalDate.now());
+        boolean isScheduledDay = transaction.getScheduledDate() != null && 
+            transaction.getScheduledDate().toLocalDate().plusDays(1).isEqual(LocalDate.now());
         
         if(sourceAccount.isEmpty()) {
             throw new IllegalArgumentException("There are no account with id " + transaction.getSourceAccountId());
         }
         
-        if (!(transaction.isScheduled() && isScheduledDay) && transaction.getType() != TransactionType.INTEREST && sourceAccount.get().getBalance().compareTo(transaction.getAmount()) < 0) {
+        if (!isScheduledDay && transaction.getType() != TransactionType.INTEREST && sourceAccount.get().getBalance().compareTo(transaction.getAmount()) < 0) {
             throw new IllegalArgumentException("Insufficient funds in the source account.");
         }
         
@@ -122,7 +122,7 @@ public class TransactionService {
     }
     
     private void processInterestTransaction(Transaction transaction, Account sourceAccount) {
-        var interest = sourceAccount.getInterestRate().multiply(sourceAccount.getBalance()).scaleByPowerOfTen(-2);
+        var interest = InterestCalculator.calculate(sourceAccount);
         transaction.setAmount(interest);
         BigDecimal newBalance = null;
         

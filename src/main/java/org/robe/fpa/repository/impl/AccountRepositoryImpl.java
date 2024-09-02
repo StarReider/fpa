@@ -53,6 +53,11 @@ public class AccountRepositoryImpl implements AccountRepository {
         namedParameterJdbcTemplate.update(Queries.DELETE_ACCOUNT_BY_ID, Map.of("id", accountId));
     }
 
+    @Override
+    public List<Account> findAllWithInterest() { 
+        return namedParameterJdbcTemplate.query(Queries.FIND_ALL_ACTIVE_ACCOUNTS_WITH_INTEREST, accountMapper);
+    }
+
     private SqlParameterSource prepareAccountForInsert(Account account) {
         return new MapSqlParameterSource()
                 .addValue("user_id", account.getUserId())
@@ -61,6 +66,9 @@ public class AccountRepositoryImpl implements AccountRepository {
                 .addValue("balance", account.getBalance())
                 .addValue("currency", account.getCurrency())
                 .addValue("interest_rate", account.getInterestRate())
+                .addValue("interest_account_id", account.getInterestAccountId())
+                .addValue("interest_end_date", account.getInterestEndDate())
+                .addValue("interest_start_date", account.getInterestStartDate())
                 .addValue("interest_account_id", account.getInterestAccountId());
     }
 

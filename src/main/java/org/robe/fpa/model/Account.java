@@ -1,6 +1,7 @@
 package org.robe.fpa.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import jakarta.validation.constraints.NotNull;
@@ -20,8 +21,10 @@ public class Account {
     @NotNull
     private String currency;
     private BigDecimal interestRate;
+    private InterestFrequency interestFrequency;
     private Long interestAccountId; // target account for interest payments
-    private LocalDateTime interestDate;
+    private LocalDate interestStartDate;
+    private LocalDate interestEndDate;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }
