@@ -42,11 +42,11 @@ public class Queries {
     public static final String FIND_ALL_ACTIVE_ACCOUNTS_WITH_INTEREST = 
          "SELECT account_id, user_id, account_name, type, balance, currency, interest_rate, interest_account_id, interest_frequency, interest_start_date, interest_end_date, created_at, updated_at " +
          "FROM Accounts " + 
-         "WHERE interest_rate != 0 AND interest_end_date <= CURRENT_DATE";
+         "WHERE interest_rate != 0 AND interest_end_date >= CURRENT_DATE";
     
     public static final String CREATE_ACCOUNT = 
-        "INSERT INTO Accounts(user_id, account_name, type, balance, currency, interest_rate, interest_account_id, interest_start_date, interest_end_date) " +
-        "VALUES(:user_id, :account_name, :type, :balance, :currency, :interest_rate, :interest_account_id, :interest_start_date, :interest_end_date)";
+        "INSERT INTO Accounts(user_id, account_name, type, balance, currency, interest_rate, interest_account_id, interest_frequency, interest_start_date, interest_end_date) " +
+        "VALUES(:user_id, :account_name, :type, :balance, :currency, :interest_rate, :interest_account_id, :interest_frequency, :interest_start_date, :interest_end_date)";
     
     public static final String UPDATE_ACCOUNT = 
         "UPDATE Accounts " +
