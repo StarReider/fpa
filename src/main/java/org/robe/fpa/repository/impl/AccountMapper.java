@@ -31,7 +31,10 @@ public class AccountMapper implements RowMapper<Account> {
             account.setInterestAccountId(rs.getLong("interest_account_id"));
         }
         
-        account.setInterestFrequency(InterestFrequency.valueOf(rs.getString("interest_frequency")));
+        account.setInterestFrequency(
+                Optional.ofNullable(rs.getString("interest_frequency"))
+                    .map(InterestFrequency::valueOf)
+                    .orElse(null));
         account.setInterestStartDate(
                 Optional.ofNullable(rs.getDate("interest_start_date"))
                     .map(Date::toLocalDate)
