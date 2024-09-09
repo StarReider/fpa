@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/accounts")
 public class AccountController {
@@ -40,7 +42,7 @@ public class AccountController {
     }
 
     @PostMapping
-    public ResponseEntity<Long> createAccount(@RequestBody Account account) {
+    public ResponseEntity<Long> createAccount(@Valid @RequestBody Account account) {
         long id = accountService.createAccount(account);
         return new ResponseEntity<>(id, HttpStatus.CREATED);
     }

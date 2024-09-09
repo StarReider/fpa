@@ -1,14 +1,23 @@
 package org.robe.fpa.errorhandling;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.ConstraintViolation;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.robe.fpa.exceptions.NotFoundException;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.ServletWebRequest;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -38,6 +47,21 @@ public class CommonExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ErrorMessage.builder()
                 .message(e.getMessage())
                 .build());
+    }
+    
+    @Override
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+            HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+        var result = ex.getBindingResult();
+        List<ObjectError> errors = result.getAllErrors();
+    
+        return ResponseEntity
+                .badRequest()
+                .body(JsonNodeFactory.instance.objectNode().put("message", 
+                                errors.stream()
+                                        .map(err -> err.unwrap(ConstraintViolation.class))
+                                        .map(ConstraintViolation::getMessage)
+                                        .collect(Collectors.joining(", "))));
     }
     
     private String requestToString(HttpServletRequest request) {
