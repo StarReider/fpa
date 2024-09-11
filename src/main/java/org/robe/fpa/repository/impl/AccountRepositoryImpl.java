@@ -70,7 +70,8 @@ public class AccountRepositoryImpl implements AccountRepository {
                 .addValue("interest_frequency", account.getInterestFrequency(), Types.OTHER)
                 .addValue("interest_end_date", account.getInterestEndDate())
                 .addValue("interest_start_date", account.getInterestStartDate())
-                .addValue("interest_account_id", account.getInterestAccountId());
+                .addValue("interest_account_id", account.getInterestAccountId())
+                .addValue("tax", account.getTax());
     }
 
     private SqlParameterSource prepareAccountForUpdate(Account account) {

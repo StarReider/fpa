@@ -26,6 +26,7 @@ public class AccountMapper implements RowMapper<Account> {
         account.setBalance(rs.getBigDecimal("balance"));
         account.setCurrency(rs.getString("currency"));
         account.setInterestRate(rs.getBigDecimal("interest_rate"));
+        account.setTax(rs.getBigDecimal("tax"));
         
         if(rs.getLong("interest_account_id") != 0) { 
             account.setInterestAccountId(rs.getLong("interest_account_id"));

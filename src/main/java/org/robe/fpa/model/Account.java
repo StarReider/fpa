@@ -28,6 +28,7 @@ public class Account {
     private Long interestAccountId; // target account for interest payments
     private LocalDate interestStartDate;
     private LocalDate interestEndDate;
+    private BigDecimal tax;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

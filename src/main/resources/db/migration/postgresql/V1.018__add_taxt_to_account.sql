@@ -1,0 +1,2 @@
+ALTER TABLE Accounts
+ADD COLUMN tax numeric DEFAULT 0;

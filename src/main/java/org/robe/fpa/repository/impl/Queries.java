@@ -36,22 +36,22 @@ public class Queries {
         "WHERE user_id = :id";
     
     public static final String FIND_ALL_ACCOUNTS = 
-        "SELECT account_id, user_id, account_name, type, balance, currency, interest_rate, interest_account_id, interest_frequency, interest_start_date, interest_end_date, created_at, updated_at " +
+        "SELECT account_id, user_id, account_name, type, balance, currency, interest_rate, interest_account_id, interest_frequency, interest_start_date, interest_end_date, tax, created_at, updated_at " +
         "FROM Accounts";
     
     public static final String FIND_ALL_ACTIVE_ACCOUNTS_WITH_INTEREST = 
-         "SELECT account_id, user_id, account_name, type, balance, currency, interest_rate, interest_account_id, interest_frequency, interest_start_date, interest_end_date, created_at, updated_at " +
+         "SELECT account_id, user_id, account_name, type, balance, currency, interest_rate, interest_account_id, interest_frequency, interest_start_date, interest_end_date, tax, created_at, updated_at " +
          "FROM Accounts " + 
          "WHERE interest_rate != 0 AND interest_end_date >= CURRENT_DATE";
     
     public static final String CREATE_ACCOUNT = 
-        "INSERT INTO Accounts(user_id, account_name, type, balance, currency, interest_rate, interest_account_id, interest_frequency, interest_start_date, interest_end_date) " +
-        "VALUES(:user_id, :account_name, :type, :balance, :currency, :interest_rate, :interest_account_id, :interest_frequency, :interest_start_date, :interest_end_date)";
+        "INSERT INTO Accounts(user_id, account_name, type, balance, currency, interest_rate, interest_account_id, interest_frequency, interest_start_date, interest_end_date, tax) " +
+        "VALUES(:user_id, :account_name, :type, :balance, :currency, :interest_rate, :interest_account_id, :interest_frequency, :interest_start_date, :interest_end_date, :tax)";
     
     public static final String UPDATE_ACCOUNT = 
         "UPDATE Accounts " +
         "SET user_id = :user_id, account_name = :account_name, type = :type, balance = :balance, currency = :currency, interest_rate = :interest_rate, " + 
-            "interest_account_id = :interest_account_id, interest_start_date = :interest_start_date, interest_end_date = :interest_end_date, updated_at = now() " +
+            "interest_account_id = :interest_account_id, interest_start_date = :interest_start_date, interest_end_date = :interest_end_date, tax = :tax, updated_at = now() " +
         "WHERE account_id = :id";
     
     public static final String DELETE_ACCOUNT_BY_ID = 
@@ -59,7 +59,7 @@ public class Queries {
         "WHERE account_id = :id";
     
     public static final String FIND_ACCOUNT_BY_ID = 
-        "SELECT account_id, user_id, account_name, type, balance, currency, interest_rate, interest_account_id, interest_frequency, interest_start_date, interest_end_date, created_at, updated_at " +
+        "SELECT account_id, user_id, account_name, type, balance, currency, interest_rate, interest_account_id, interest_frequency, interest_start_date, interest_end_date, tax, created_at, updated_at " +
         "FROM Accounts " + 
         "WHERE account_id = :id";
     
