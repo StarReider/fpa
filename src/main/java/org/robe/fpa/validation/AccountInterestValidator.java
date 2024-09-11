@@ -18,7 +18,7 @@ public class AccountInterestValidator implements ConstraintValidator<InterestVal
         }
         
         if(rate != null && rate.compareTo(BigDecimal.ZERO) == 1) {
-            if(account.getInterestFrequency() == null || account.getInterestEndDate() == null || account.getInterestAccountId() == null) {
+            if(account.getInterestFrequency() == null || account.getInterestEndDate() == null) {
                 return false;
             }
             
