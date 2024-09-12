@@ -14,12 +14,14 @@ jobs:
           curl -I -X POST --location 'https://financialpersonalapp.adaptable.app/api/transactions/scheduled'
   interest_transactions_job:
     runs-on: ubuntu-latest
+    needs: scheduled_transactions_job
     steps:
       - name: Run curl
         run: |
           curl -I -X POST --location 'https://financialpersonalapp.adaptable.app/api/accounts/interests'
   currencies_sync_job:
     runs-on: ubuntu-latest
+    needs: interest_transactions_job
     steps:
       - name: Run curl
         run: |
