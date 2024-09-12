@@ -12,6 +12,12 @@ jobs:
       - name: Run curl
         run: |
           curl -I -X POST --location 'https://financialpersonalapp.adaptable.app/api/transactions/scheduled'
+  interest_transactions_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run curl
+        run: |
+          curl -I -X POST --location 'https://financialpersonalapp.adaptable.app/api/accounts/interests'
   currencies_sync_job:
     runs-on: ubuntu-latest
     steps:
