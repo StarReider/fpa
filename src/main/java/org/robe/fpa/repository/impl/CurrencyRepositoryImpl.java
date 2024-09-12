@@ -7,14 +7,11 @@ import java.util.Optional;
 
 import org.robe.fpa.model.Currency;
 import org.robe.fpa.repository.CurrencyRepository;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
-import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
 
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 
 @Repository
@@ -22,15 +19,7 @@ import lombok.RequiredArgsConstructor;
 public class CurrencyRepositoryImpl implements CurrencyRepository {
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-    private final JdbcTemplate jdbcTemplate;
     private final CurrencyMapper currencyMapper;
-    
-    private SimpleJdbcCall deleteFiatJdbcCall;
-    
-    @PostConstruct
-    public void init() {
-        deleteFiatJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("delete_fiat");
-    }
     
     @Override
     public List<Currency> findAll() {
@@ -62,8 +51,8 @@ public class CurrencyRepositoryImpl implements CurrencyRepository {
     }
     
     @Override
-    public void deleteAll() {
-        deleteFiatJdbcCall.execute();
+    public void deleteAllFiat() {
+        namedParameterJdbcTemplate.update(Queries.DELETE_ALL_FIAT_CURRENCIES, Map.of());
     }
     
     private SqlParameterSource prepareCurrencyForInsert(Currency currency) {

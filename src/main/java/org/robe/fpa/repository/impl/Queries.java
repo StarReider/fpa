@@ -85,8 +85,8 @@ public class Queries {
         "DELETE FROM Currencies " +
         "WHERE currency_code = :code";
     
-    public static final String DELETE_ALL_CURRENCIES = 
-        "TRUNCATE TABLE Currencies CASCADE";
+    public static final String DELETE_ALL_FIAT_CURRENCIES = 
+        "DELETE FROM Currencies WHERE type = 'FIAT'";
     
     public static final String FIND_TRANSACTION_BY_ID = 
         "SELECT transaction_id, status, source_account_id, target_account_id, amount, type, description, is_scheduled, scheduled_date, target_amount, created_at, updated_at " +

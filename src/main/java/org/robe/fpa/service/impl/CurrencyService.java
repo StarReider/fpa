@@ -58,7 +58,7 @@ public class CurrencyService {
     public void syncCurrencies() {
         var response = ratesService.retriveRates();
         List<Currency> currencies = transform(response.getBase(), response.getRates());
-        currencyRepository.deleteAll();
+        currencyRepository.deleteAllFiat();
         currencyRepository.save(currencies);
     }
 

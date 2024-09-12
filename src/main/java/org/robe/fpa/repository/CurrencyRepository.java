@@ -11,5 +11,5 @@ public interface CurrencyRepository {
     void save(Currency currency);
     void deleteById(String currencyCode);
     void save(List<Currency> currencies);
-    void deleteAll();
+    void deleteAllFiat();
 }
