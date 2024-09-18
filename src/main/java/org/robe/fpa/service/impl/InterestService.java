@@ -44,8 +44,8 @@ public class InterestService {
                     (LocalDate.now().isAfter(acc.getInterestStartDate())) || LocalDate.now().isEqual(acc.getInterestStartDate())) ||
                (InterestFrequency.MONTHLY == acc.getInterestFrequency() && 
                     (acc.getInterestStartDate().plusDays(1).isEqual(LocalDate.now()) || 
-                            acc.getInterestStartDate().plusMonths(1).plusDays(1).isEqual(LocalDate.now()))) || 
+                            LocalDate.now().getDayOfMonth() == acc.getInterestStartDate().plusDays(1).getDayOfMonth()) || 
                (InterestFrequency.YEARLY == acc.getInterestFrequency() && 
-                    acc.getInterestStartDate().plusYears(1).plusDays(1).isEqual(LocalDate.now()));
+                       LocalDate.now().getDayOfYear() == acc.getInterestStartDate().plusYears(1).plusDays(1).getDayOfYear()));
     }
 }
