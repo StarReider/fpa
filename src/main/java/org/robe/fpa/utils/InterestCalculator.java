@@ -29,7 +29,7 @@ public class InterestCalculator {
     }
     
     private static BigDecimal applyTax(BigDecimal value, BigDecimal tax) {
-        if(BigDecimal.ZERO == tax) {
+        if(tax == null || BigDecimal.ZERO == tax) {
             return value;
         }
         
