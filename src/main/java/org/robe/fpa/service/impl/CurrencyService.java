@@ -33,6 +33,10 @@ public class CurrencyService {
         currencyRepository.save(currency);
     }
     
+    public void deleteAllFiat() {
+        currencyRepository.deleteAllFiat();
+    }
+    
     public boolean updateCurrency(String currencyCode, Currency currencyDetails) {
         Optional<Currency> currencyOptional = currencyRepository.findByCode(currencyCode);
         if (currencyOptional.isPresent()) {

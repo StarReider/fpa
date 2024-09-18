@@ -50,6 +50,12 @@ public class CurrencyController {
         return ResponseEntity.noContent().build();
     }
     
+    @DeleteMapping("/fiat")
+    public ResponseEntity<Void> deleteCurrencies() {
+        currencyService.deleteAllFiat();
+        return ResponseEntity.noContent().build();
+    }
+    
     @PostMapping("/sync")
     public ResponseEntity<Void> sync() {
         currencyService.syncCurrencies();
