@@ -46,6 +46,12 @@ public class AccountController {
         long id = accountService.createAccount(account);
         return new ResponseEntity<>(id, HttpStatus.CREATED);
     }
+    
+    @PostMapping("bulk")
+    public ResponseEntity<Void> importAccounts(@Valid @RequestBody List<Account> accounts) {
+        accountService.createAccounts(accounts);
+        return ResponseEntity.noContent().build();
+    }
 
     @PutMapping("/{id}")
     public ResponseEntity<Account> updateAccount(@PathVariable("id") Long accountId,

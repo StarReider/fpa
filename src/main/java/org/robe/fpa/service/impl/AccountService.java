@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.robe.fpa.model.Account;
 import org.robe.fpa.repository.AccountRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 
@@ -25,6 +26,16 @@ public class AccountService {
 
     public Long createAccount(Account account) {
         return accountRepository.save(account);
+    }
+    
+    @Transactional
+    public void createAccounts(List<Account> accounts) {
+        accounts.stream()
+            .map(acc -> {
+                acc.setAccountId(null); // in case of import existing accounts
+                return acc;
+            })
+            .forEach(accountRepository::save);
     }
 
     public boolean updateAccount(Long accountId, Account accountDetails) {
