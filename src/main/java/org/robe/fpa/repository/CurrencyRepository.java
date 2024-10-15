@@ -12,4 +12,5 @@ public interface CurrencyRepository {
     void deleteById(String currencyCode);
     void save(List<Currency> currencies);
     void deleteAllFiat();
+    void deleteAllCrypto();
 }

@@ -5,9 +5,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.robe.fpa.configuration.CurrencyConfiguration;
 import org.robe.fpa.model.Currency;
 import org.robe.fpa.model.CurrencyType;
 import org.robe.fpa.repository.CurrencyRepository;
+import org.robe.fpa.service.CmcRatesService;
 import org.robe.fpa.service.OpenExchangeRatesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +21,11 @@ public class CurrencyService {
     @Autowired
     private CurrencyRepository currencyRepository;
     @Autowired
-    private OpenExchangeRatesService ratesService;
+    private OpenExchangeRatesService fiatrRatesService;
+    @Autowired
+    private CmcRatesService cryptoRatesService;
+    @Autowired
+    private CurrencyConfiguration configuration;
 
     public List<Currency> getAllCurrencies() {
         return currencyRepository.findAll();
@@ -35,6 +41,10 @@ public class CurrencyService {
     
     public void deleteAllFiat() {
         currencyRepository.deleteAllFiat();
+    }
+    
+    public void deleteAllCrypto() {
+        currencyRepository.deleteAllCrypto();
     }
     
     public boolean updateCurrency(String currencyCode, Currency currencyDetails) {
@@ -59,14 +69,24 @@ public class CurrencyService {
     }
     
     @Transactional
-    public void syncCurrencies() {
-        var response = ratesService.retriveRates();
-        List<Currency> currencies = transform(response.getBase(), response.getRates());
+    public void syncFiatCurrencies() {
+        var response = fiatrRatesService.retriveRates();
+        List<Currency> currencies = transformFiat(configuration.getBaseCurrency(), response.getRates());
+        
         currencyRepository.deleteAllFiat();
         currencyRepository.save(currencies);
     }
+    
+    @Transactional
+    public void syncCryptoCurrencies() {
+        var response = cryptoRatesService.retriveRates();
+        List<Currency> currencies = transformCrypto(configuration.getBaseCurrency(), response.getData());
+        
+        currencyRepository.deleteAllCrypto();
+        currencyRepository.save(currencies);
+    }
 
-    private List<Currency> transform(String base, Map<String, String> rates) {
+    private List<Currency> transformFiat(String base, Map<String, String> rates) {
         return rates.entrySet().stream()
                 .map(entry -> Currency.builder()
                         .baseCurrencyCode(base)
@@ -75,5 +95,24 @@ public class CurrencyService {
                         .exchangeRate(new BigDecimal(entry.getValue()))
                         .type(CurrencyType.FIAT)
                         .build()).toList();
+    }
+    
+    private List<Currency> transformCrypto(String base, Map<String, org.robe.fpa.model.cmc.Currency> data) {
+        return data.entrySet().stream()
+                .map(entry -> {
+                    var currencyToPriceMap = entry.getValue().getQuote();
+                    if(currencyToPriceMap.get(base) == null) {
+                        return null;
+                    }
+                    
+                    var price = currencyToPriceMap.get(base).getPrice();
+                    return Currency.builder()
+                        .baseCurrencyCode(base)
+                        .currencyCode(entry.getValue().getSymbol())
+                        .currencyName(entry.getValue().getSymbol())
+                        .exchangeRate(new BigDecimal(price))
+                        .type(CurrencyType.CRYPTO)
+                        .build();
+                }).toList();
     }
 }

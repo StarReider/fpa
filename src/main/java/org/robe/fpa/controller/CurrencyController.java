@@ -56,9 +56,15 @@ public class CurrencyController {
         return ResponseEntity.noContent().build();
     }
     
-    @PostMapping("/sync")
-    public ResponseEntity<Void> sync() {
-        currencyService.syncCurrencies();
+    @PostMapping("/sync/fiat")
+    public ResponseEntity<Void> syncFiat() {
+        currencyService.syncFiatCurrencies();
+        return ResponseEntity.noContent().build();
+    }
+    
+    @PostMapping("/sync/crypto")
+    public ResponseEntity<Void> syncCrypto() {
+        currencyService.syncCryptoCurrencies();
         return ResponseEntity.noContent().build();
     }
     

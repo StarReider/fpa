@@ -7,8 +7,9 @@ import lombok.Data;
 
 @Data
 @Configuration
-@ConfigurationProperties(prefix="application.currency.oe")
-public class OpenExchangeRatesConfiguration {
+@ConfigurationProperties(prefix="application.currency.cmc")
+public class CoinMarketCapConfiguration {
     private String url;
     private String appId;
+    private String slug;
 }

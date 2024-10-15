@@ -1,11 +1,11 @@
-package org.robe.fpa.model;
+package org.robe.fpa.model.oe;
 
 import java.util.Map;
 
 import lombok.Data;
 
 @Data
-public class OpenExchangeRateResponse {
+public class OeResponse {
     private long timestamp;
     private String base;
     private Map<String, String> rates;

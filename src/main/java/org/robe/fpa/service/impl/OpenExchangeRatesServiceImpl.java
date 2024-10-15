@@ -3,12 +3,11 @@ package org.robe.fpa.service.impl;
 import java.util.Map;
 
 import org.robe.fpa.configuration.OpenExchangeRatesConfiguration;
-import org.robe.fpa.model.OpenExchangeRateResponse;
+import org.robe.fpa.model.oe.OeResponse;
 import org.robe.fpa.service.OpenExchangeRatesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClient;
 
 import jakarta.annotation.PostConstruct;
@@ -31,15 +30,15 @@ public class OpenExchangeRatesServiceImpl implements OpenExchangeRatesService {
     }
     
     @Override
-    public OpenExchangeRateResponse retriveRates() {
+    public OeResponse retriveRates() {
         try {
             return restClient.get()
                     .accept(MediaType.APPLICATION_JSON)
                     .retrieve()
-                    .body(OpenExchangeRateResponse.class);
-        } catch(HttpClientErrorException e) {
+                    .body(OeResponse.class);
+        } catch(Exception e) {
                 log.error(e.getMessage(), e);
-                throw new RuntimeException(e.getMessage());
+                throw new RuntimeException(e);
         }
     }
 }

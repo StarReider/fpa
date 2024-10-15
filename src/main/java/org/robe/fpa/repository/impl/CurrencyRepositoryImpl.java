@@ -55,6 +55,11 @@ public class CurrencyRepositoryImpl implements CurrencyRepository {
         namedParameterJdbcTemplate.update(Queries.DELETE_ALL_FIAT_CURRENCIES, Map.of());
     }
     
+    @Override
+    public void deleteAllCrypto() {
+        namedParameterJdbcTemplate.update(Queries.DELETE_ALL_CRYPTO_CURRENCIES, Map.of()); 
+    }
+    
     private SqlParameterSource prepareCurrencyForInsert(Currency currency) {
         return new MapSqlParameterSource()
                 .addValue("currency_code", currency.getCurrencyCode())

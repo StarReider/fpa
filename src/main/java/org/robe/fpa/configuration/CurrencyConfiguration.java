@@ -7,8 +7,7 @@ import lombok.Data;
 
 @Data
 @Configuration
-@ConfigurationProperties(prefix="application.currency.oe")
-public class OpenExchangeRatesConfiguration {
-    private String url;
-    private String appId;
+@ConfigurationProperties(prefix="application.currency")
+public class CurrencyConfiguration {
+    private String baseCurrency;
 }
